@@ -159,7 +159,12 @@ export const resendOtpController = async (req, res) => {
   }
 };
 export const logoutController = async (req, res) => {
-  res.clearCookie('jwt');
+  res.clearCookie('jwt',{
+    httpOnly: true, // Prevent access by JavaScript
+      secure: true, // Ensure the cookie is sent over HTTPS
+    
+      sameSite: 'none',
+  });
   res.send({ data: 'success', message: 'success' });
 };
 
